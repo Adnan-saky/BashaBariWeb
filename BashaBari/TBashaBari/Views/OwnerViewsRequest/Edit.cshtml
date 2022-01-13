@@ -1,0 +1,48 @@
+﻿@model TBashaBari.Models.TenantRequest
+
+<form method="post" class="text-center">
+    <div class="border p-3">
+        <div class="form-group">
+            <h2 class="text-primary font-weight-bold">Feedback</h2>
+        </div>
+        <input asp-for="RequestId" hidden />
+        <input asp-for="TenantEmail" hidden />
+        <input asp-for="RequestText" hidden />
+        <input asp-for="RequestTime" hidden />
+        <input id="today" asp-for="CommentOnRequestTime" class="form-control" hidden />
+        <input asp-for="CommentOnRequestText" class="form-control text-center py-4" />
+        <br>
+        <input type="submit" class="btn btn-success w-20 m-2" value="Update" />
+        <a asp-action="Index" class="btn btn-primary w-20 m-2">
+            Back
+        </a>
+
+    </div>
+</form>
+
+<script>
+    var today = new Date().toISOString().substr(0, 10);
+    var currentTime = new Date();
+    var currentHours = currentTime.getHours();
+    var currentMinutes = currentTime.getMinutes();
+
+    // Pad the currentMinutes with leading zeros, if required
+    currentMinutes = (currentMinutes < 10 ? "0" : "") + currentMinutes;
+
+    // Pad currentHours with leading zeros, if required
+    currentHours = (currentHours < 10 ? "0" : "") + currentHours;
+
+    // Compose the string for display
+    var currentTimeString = currentHours + ":" + currentMinutes;
+
+    // Final Time
+    document.querySelector("#today").value = "[Replied on]  " + today + " at " + currentTimeString;
+</script>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+

@@ -1,0 +1,73 @@
+﻿@model TBashaBari.Models.TenantConnectsOwner
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<form method="post" asp-action="Create" class="text-center">
+    <div class="border p-3">
+        <div class="form-group">
+            <h2 class="text-primary font-weight-bold">Add Your Owner's Email</h2>
+        </div>
+        <input asp-for="TenantEmail" class="form-control" value="@UserManager.GetUserName(User)" hidden />
+        <input asp-for="IsConfirmed" class="form-control" value="No" hidden />
+        <input asp-for="OwnerEmail" class="form-control text-center py-4" />
+        <br>
+        <input type="submit" class="btn btn-success w-20 m-2" value="Add" />
+        <a asp-action="Index" class="btn btn-primary w-20 m-2">
+            Back
+        </a>
+
+    </div>
+    
+    <!--<div class="border p-3">-->
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <!--<div class="form-group row">
+            <h2 class="text-info pl-3">Add Your Owner</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <input asp-for="TenantEmail" class="form-control" value="UserManager.GetUserName(User)" readonly hidden />
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="OwnerEmail"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="OwnerEmail" class="form-control" />
+                        <span asp-validation-for="OwnerEmail" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <input asp-for="IsConfirmed" class="form-control" value="No" readonly hidden />
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Add" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">-->
+                @* Keep this empty *@
+            <!--</div>
+        </div>
+    </div>-->
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+

@@ -1,0 +1,56 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Data.SqlClient;
+@using TBashaBari.Controllers;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    string GetUserFullName(string _Email)
+    {
+        //database operation to get current tenants's fullname
+        DatabaseConnection ob = new DatabaseConnection();
+        string FullName = ob.getUserFullName(_Email);
+        return FullName;
+    }
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary font-weight-bold">Your Owner's Notices</h2>
+        </div>
+    </div>
+    <br /><br />
+    @{
+        if (Model.Count != 0)
+        {
+            foreach (var obj in Model)
+            {
+                <div class="card w-80 mb-5 mx-5" style="background-color: gainsboro">
+                    <div class="row no-gutters">
+                        <div class="col-sm-2">
+                            <div class="login-form-icon text-center">
+                                <i class="fas fa-user-circle fa-6x text-secondary p-3"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="card-body">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="font-weight-bold">@GetUserFullName(obj.OwnerEmail) </h5>
+                                    <small>@obj.NoticeTime</small>
+                                </div>
+                                <small>[ @obj.OwnerEmail ]</small>
+                                <p class="my-4 ml-2">@obj.NoticeText</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h5 class="p-4">You are not connected to any Owner.</h5>
+        }
+    }
+</div>
+

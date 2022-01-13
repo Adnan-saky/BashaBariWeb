@@ -1,0 +1,84 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Data.SqlClient;
+@using TBashaBari.Controllers;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@{
+    string GetUserFullName(string _Email)
+    {
+        //database operation to get current tenants's fullname
+        DatabaseConnection ob = new DatabaseConnection();
+        string FullName = ob.getUserFullName(_Email);
+        return FullName;
+    }
+    string GetUserPhoneNumber(string _Email)
+    {
+        //database operation to get current tenants's fullname
+        DatabaseConnection ob = new DatabaseConnection();
+        string PhoneNumber = ob.getUserPhoneNumber(_Email);
+        return PhoneNumber;
+    }
+
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary font-weight-bold">Your Owner</h2>
+        </div>
+    </div>
+    <br /><br />
+
+    @{
+        if (Model.Count != 0)
+        {
+            foreach (var obj in Model)
+            {
+                <div class="card w-80 mb-5 mx-5" style="background-color: gainsboro">
+                    <div class="row no-gutters">
+                        <div class="col-sm-2">
+                            <div class="login-form-icon text-center">
+                                <i class="fas fa-user-circle fa-6x text-secondary p-3"></i>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <div class="card-body">
+                                    <div class="w-100">
+                                        @{if (obj.IsConfirmed == "No")
+                                            {
+                                                <h5 class="font-weight-bold">[Pending Owner] @obj.OwnerEmail </h5>
+                                            }
+                                            else
+                                            {
+                                                <h5 class="font-weight-bold">@GetUserFullName(obj.OwnerEmail) </h5>
+                                                <small>[ Email: @obj.OwnerEmail ]</small>
+                                                <br />
+                                                <small>[ Phone: @GetUserPhoneNumber(obj.OwnerEmail) ]</small>
+                                            }
+                                        }
+                                    </div>
+                                <div class="text-lg-right">
+                                    <a asp-controller="TenantViewsConnectedList" asp-route-Id="@obj.ConnectionId" asp-action="Delete" class="btn btn-danger mx-2">
+                                        Remove
+                                    </a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <h5 class="px-4">You are not connected to any Owner</h5>
+            <a asp-controller="TenantViewsConnectedList" asp-action="Create" class="btn btn-primary m-4">
+                Add Owner
+            </a>
+        }
+    }
+</div>
+
+
+

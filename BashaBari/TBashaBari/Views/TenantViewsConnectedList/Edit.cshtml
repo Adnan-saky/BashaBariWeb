@@ -1,0 +1,73 @@
+﻿<!--model TBashaBari.Models.TenantConnectsOwner
+
+<form method="post">
+    <input asp-for="ConnectionId" hidden />
+    <div class="border p-3">
+        <div class="form-group row">
+            <h2 class="text-info pl-3">Edit Owner</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="TenantEmail"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="TenantEmail" class="form-control" readonly/>
+                        <span asp-validation-for="TenantEmail" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="OwnerEmail"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="OwnerEmail" class="form-control" />
+                        <span asp-validation-for="OwnerEmail" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="IsConfirmed"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="IsConfirmed" class="form-control" readonly />
+                        <span asp-validation-for="IsConfirmed" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Update" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">-->
+                 
+            <!--</div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+    document.querySelector("#today").value = today;
+</script>
+
+section Scripts{
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+}-->
+
+

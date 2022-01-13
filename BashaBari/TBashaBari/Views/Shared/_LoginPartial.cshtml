@@ -1,0 +1,121 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using System.Data.SqlClient;
+@using TBashaBari.Controllers;
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{ 
+    bool IsEmailConfirmed(string _email) {
+        DatabaseConnection ob = new DatabaseConnection();
+        bool booltemp = ob.isEmailConfirmed(_email);
+        return booltemp;
+    }
+}
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User) && User.IsInRole(TBashaBari.WebConstant.OwnerRole))
+    {
+        @*<li class="nav-item">
+                <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+            </li>*@
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <hr />
+        </li>
+        @if (IsEmailConfirmed(UserManager.GetUserName(User)))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="OwnerNotice" asp-action="Index">Notice</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="OwnerViewsRequest" asp-action="Index">Request</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="OwnerViewsConnectedList" asp-action="Index">Tenant List</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="OwnerViewsBill" asp-action="Index">Bill Info</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a>
+                <hr />
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+            <hr />
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-white w-100">Logout</button>
+                <hr />
+            </form>
+
+        </li>
+    }
+    else if (SignInManager.IsSignedIn(User) && User.IsInRole(TBashaBari.WebConstant.TenantRole))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <hr />
+        </li>
+        @if (IsEmailConfirmed(UserManager.GetUserName(User)))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="TenantRequest" asp-action="Index">Request</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="TenantViewsNotice" asp-action="Index">Notice</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="TenantViewsConnectedList" asp-action="Index">Owner</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-white" asp-area="" asp-controller="TenantViewsBill" asp-action="Index">Bill Info</a>
+                <hr />
+            </li>
+            <li class="nav-item">
+                <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Settings</a>
+                <hr />
+            </li>
+        }
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+            <hr />
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-white w-100">Logout</button>
+                <hr />
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <hr />
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="AboutUs">About Us</a>
+            <hr />
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+            <hr />
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" id="login" asp-area="Identity" asp-page="/Account/Login">Sign in</a>
+            <hr />
+        </li>
+
+    }
+</ul>

@@ -1,0 +1,77 @@
+﻿@model TBashaBari.Models.BillInformation
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+
+<form method="post" asp-action="Create" class="text-center">
+    <div class="border p-3">
+        <div class="form-group">
+            <h2 class="text-primary font-weight-bold">Fill up the Bill Form</h2>
+        </div>
+        <input asp-for="OwnerEmail" class="form-control text-center py-4" value="@UserManager.GetUserName(User)" hidden />
+
+        <label class="font-weight-bold pt-4">Tenant's Email:</label>
+        <input asp-for="TenantEmail" class="form-control text-center py-4" value="@ViewBag.SelectedTenantEmail" readonly />
+
+        <label class="font-weight-bold pt-4">Year & Month:</label>
+        <input id="today" asp-for="BillTime" class="form-control text-center py-4" readonly />
+
+        <label class="font-weight-bold pt-4">Water Bill Amount:</label>
+        <input asp-for="WaterAmount" class="form-control text-center py-4" value="0.00" />
+        <input asp-for="WaterPaid" class="form-control text-center py-4" value="No" hidden />
+        <input asp-for="WaterVerified" class="form-control text-center py-4" value="No" hidden />
+        <span asp-validation-for="WaterAmount" class="text-danger"></span>
+        <br>
+
+        <label class="font-weight-bold pt-4">Electric Bill Amount:</label>
+        <input asp-for="ElectricAmount" class="form-control text-center py-4" value="0.00" />
+        <input asp-for="ElectricPaid" class="form-control text-center py-4" value="No" hidden />
+        <input asp-for="ElectricVerified" class="form-control text-center py-4" value="No" hidden />
+        <span asp-validation-for="ElectricAmount" class="text-danger"></span>
+        <br>
+
+        <label class="font-weight-bold pt-4">Gas Bill Amount:</label>
+        <input asp-for="GasAmount" class="form-control text-center py-4" value="0.00" />
+        <input asp-for="GasPaid" class="form-control text-center py-4" value="No" hidden />
+        <input asp-for="GasVerified" class="form-control text-center py-4" value="No" hidden />
+        <span asp-validation-for="GasAmount" class="text-danger"></span>
+        <br>
+
+        <label class="font-weight-bold pt-4">Rent Amount:</label>
+        <input asp-for="RentAmount" class="form-control text-center py-4" value="0.00" />
+        <input asp-for="RentPaid" class="form-control text-center py-4" value="No" hidden />
+        <input asp-for="RentVerified" class="form-control text-center py-4" value="No" hidden />
+        <span asp-validation-for="RentAmount" class="text-danger"></span>
+        <br>
+
+        <br>
+        <input type="submit" class="btn btn-success w-20 m-2" value="Post" />
+        <a asp-action="Index" class="btn btn-primary w-20 m-2">
+            Back
+        </a>
+
+    </div>
+</form>
+
+<script>
+    var currentTime = new Date();
+    var currentYear = currentTime.getFullYear();
+    var currentMonth = currentTime.getMonth()+1;
+
+    // Pad the currentMonth with leading zeros, if required
+    currentMonth = (currentMonth < 10 ? "0" : "") + currentMonth;
+
+    // Final Time
+    document.querySelector("#today").value = currentYear + "-" + currentMonth;
+</script>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+

@@ -1,0 +1,75 @@
+﻿<!--model TBashaBari.Models.TenantRequest
+using Microsoft.AspNetCore.Identity
+
+inject SignInManager<IdentityUser> SignInManager
+inject UserManager<IdentityUser> UserManager
+
+<form method="post" asp-action="Create">
+    <div class="border p-3">-->
+        @*<div asp-validation-summary="ModelOnly" class="text-danger"></div>*@
+        <!--<div class="form-group row">
+            <h2 class="text-info pl-3">Add Request</h2>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="RequestText"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="RequestText" class="form-control" />
+                        <span asp-validation-for="RequestText" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="RequestTime"></label>
+                    </div>
+                    <div class="col-8">
+                        <input id="today" type="date" asp-for="RequestTime" class="form-control" readonly />
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="TenantEmail"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="TenantEmail" class="form-control" value="UserManager.GetUserName(User)" readonly />
+                        <span asp-validation-for="TenantEmail" class="text-danger"></span>
+                    </div>
+
+                </div>
+                <div class="form-group row">
+                    <div class="col-8 offset-4 row">
+
+                        <div class="col">
+                            <input type="submit" class="btn btn-info w-100" value="Create" />
+                        </div>
+                        <div class="col">
+                            <a asp-action="Index" class="btn btn-success w-100">
+                                Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">-->
+                @* Keep this empty *@
+            <!--</div>
+        </div>
+    </div>
+</form>
+
+<script>
+    let today = new Date().toISOString().substr(0, 10);
+    document.querySelector("#today").value = today;
+</script>
+
+section Scripts{
+    {
+        <partial name="_ValidationScriptsPartial" />
+    }
+}-->
+

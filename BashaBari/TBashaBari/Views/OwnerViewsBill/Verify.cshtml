@@ -1,0 +1,159 @@
+﻿@model TBashaBari.Models.BillInformation
+
+<form method="post" class="text-center">
+    <div class="border p-3">
+        <div class="form-group">
+            <h2 class="text-primary font-weight-bold">Verify Bills</h2>
+        </div>
+        <input asp-for="BillId" class="form-control text-center py-4" hidden />
+        <input asp-for="OwnerEmail" class="form-control text-center py-4" hidden />
+        <input asp-for="TenantEmail" class="form-control text-center py-4" hidden />
+        <input asp-for="BillTime" class="form-control text-center py-4" hidden />
+        <input asp-for="WaterAmount" class="form-control text-center py-4" hidden />
+        <input asp-for="WaterPaid" class="form-control text-center py-4" hidden />
+        <input asp-for="ElectricAmount" class="form-control text-center py-4" hidden />
+        <input asp-for="ElectricPaid" class="form-control text-center py-4" hidden />
+        <input asp-for="GasAmount" class="form-control text-center py-4" hidden />
+        <input asp-for="GasPaid" class="form-control text-center py-4" hidden />
+        <input asp-for="RentAmount" class="form-control text-center py-4" hidden />
+        <input asp-for="RentPaid" class="form-control text-center py-4" hidden />
+
+        @if (Model.WaterVerified == "No" || Model.ElectricVerified == "No" || Model.GasVerified == "No" || Model.RentVerified == "No")
+        {
+            @if (Model.WaterVerified == "No" && Model.WaterPaid == "Yes")
+            {
+                <div class="d-flex justify-content-center">
+                    <input type="checkbox" id="waterCheck" class="mt-1" onclick="waterFunction()">
+                    <p class="font-weight-bold px-3">Water Bill</p>
+                </div>
+                <input id="water" asp-for="WaterVerified" class="form-control text-center py-4" hidden />
+            }
+            else
+            {
+                <input asp-for="WaterVerified" class="form-control text-center py-4" hidden />
+            }
+
+            @if (Model.ElectricVerified == "No" && Model.ElectricPaid == "Yes")
+            {
+                <div class="d-flex justify-content-center">
+                    <input type="checkbox" id="electricCheck" class="mt-1" onclick="electricFunction()">
+                    <p class="font-weight-bold px-3">Electric Bill</p>
+                </div>
+                <input id="electric" asp-for="ElectricVerified" class="form-control text-center py-4" hidden />
+            }
+            else
+            {
+                <input asp-for="ElectricVerified" class="form-control text-center py-4" hidden />
+            }
+
+            @if (Model.GasVerified == "No" && Model.GasPaid == "Yes")
+            {
+                <div class="d-flex justify-content-center">
+                    <input type="checkbox" id="gasCheck" class="mt-1" onclick="gasFunction()">
+                    <p class="font-weight-bold px-3">Gas Bill</p>
+                </div>
+                <input id="gas" asp-for="GasVerified" class="form-control text-center py-4" hidden />
+            }
+            else
+            {
+                <input asp-for="GasVerified" class="form-control text-center py-4" hidden />
+            }
+
+
+            @if (Model.RentVerified == "No" && Model.RentPaid == "Yes")
+            {
+                <div class="d-flex justify-content-center">
+                    <input type="checkbox" id="rentCheck" class="mt-1" onclick="rentFunction()">
+                    <p class="font-weight-bold px-3">Rent Bill</p>
+                </div>
+                <input id="rent" asp-for="RentVerified" class="form-control text-center py-4" hidden />
+            }
+            else
+            {
+                <input asp-for="RentVerified" class="form-control text-center py-4" hidden />
+            }
+
+            <br>
+            <input type="submit" class="btn btn-success w-20 m-2" value="Confirm" />
+        }
+        else
+        {
+            <h5 class="p-4">All bills have been verified.</h5>
+        }
+
+
+        <a asp-action="Index" class="btn btn-primary w-20 m-2">
+            Back
+        </a>
+
+    </div>
+</form>
+
+<script>
+    function waterFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("waterCheck");
+        // Get the output text
+        var text = document.getElementById("water");
+
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+            text.value = "Yes";
+        } else {
+            text.value = "No";
+        }
+    }
+
+    function electricFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("electricCheck");
+        // Get the output text
+        var text = document.getElementById("electric");
+
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+            text.value = "Yes";
+        } else {
+            text.value = "No";
+        }
+    }
+
+    function gasFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("gasCheck");
+        // Get the output text
+        var text = document.getElementById("gas");
+
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+            text.value = "Yes";
+        } else {
+            text.value = "No";
+        }
+    }
+
+    function rentFunction() {
+        // Get the checkbox
+        var checkBox = document.getElementById("rentCheck");
+        // Get the output text
+        var text = document.getElementById("rent");
+
+        // If the checkbox is checked, display the output text
+        if (checkBox.checked == true) {
+            text.value = "Yes";
+        } else {
+            text.value = "No";
+        }
+    }
+
+
+</script>
+
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}
+
+

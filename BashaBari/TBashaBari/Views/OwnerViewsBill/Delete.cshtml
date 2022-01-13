@@ -1,0 +1,25 @@
+﻿@*@model TBashaBari.Models.OwnerNotice
+
+<form method="post" class="text-center">
+    <input asp-for="NoticeId" hidden />
+    <div class="border p-3">
+        <div class="form-group">
+            <h2 class="text-primary pl-3 font-weight-bold">Are you sure, you want to delete the Notice?</h2>
+        </div>
+        <input asp-for="NoticeText" class="form-control" hidden />
+        <input asp-for="NoticeTime" class="form-control" hidden />
+        <input asp-for="OwnerEmail" class="form-control" hidden />
+        <input type="submit" class="btn btn-danger w-20 m-2" value="Delete" />
+        <a asp-action="Index" class="btn btn-primary w-20 m-2">
+            Back
+        </a>
+    </div>
+</form>
+
+@section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}*@
+
+
